@@ -14,8 +14,18 @@
 
 <body>
 <div id="wrapper">
+    <aside id="navbar"> <!-- was leftsidebar -->
+        <nav id="nav">
+            <ul>
+                 {% block sidenav %}
+                     <li class> Menu 1</li>
+                     <li class> Menu 2</li>
+                 {% endblock sidenav %}
+            </ul>
+        </nav>
+    </aside>
     <header id="header">
-        <img src="{% static 'logo.jpg' %}" height="50"/>
+        <img id="logo" src="{% static 'newlogo.png' %}"/>
 
         <span style="float: right;" >
             {% if user.is_authenticated %}
@@ -30,19 +40,9 @@
             {% endif %}
         </span>
 
-        <img src="{% static 'banner.jpg' %}" width="800" height="150"/>
+        <img id="banner" src="{% static 'banner.jpg' %}" width="800" height="150"/>
     </header>
 
-    <aside id="navbar"> <!-- was leftsidebar -->
-        <nav id="nav">
-            <ul>
-                 {% block sidenav %}
-                     <li> Menu 1</li>
-                     <li> Menu 2</li>
-                 {% endblock sidenav %}
-            </ul>
-        </nav>
-    </aside>
     <section id="main">
         {% block content %}
            <h1>This is our Book Exchange System</h1>
