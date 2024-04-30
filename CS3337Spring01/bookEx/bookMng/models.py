@@ -11,7 +11,7 @@ class MainMenu(models.Model):
 
 
 class Book(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField('Book Name',max_length=200)
     web = models.URLField(max_length=300)
     price = models.DecimalField(decimal_places=2, max_digits=8)
     publishdate = models.DateField(auto_now=True)
