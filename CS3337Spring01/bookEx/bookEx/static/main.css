@@ -63,7 +63,7 @@
     float: left;
     font-size: 1em;
     list-style-type: none;
-    border: 1px solid rgb(255, 215, 0); /* solid gold border on around navbar elements */
+    border: 1.5px solid rgb(255, 215, 0); /* solid gold border on around navbar elements */
     color: #4C4C4C; /* color of text of each element in navbar */
 }
 
