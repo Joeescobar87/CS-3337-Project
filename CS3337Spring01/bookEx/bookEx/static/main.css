@@ -86,3 +86,8 @@ p {
     text-indent: 3mm;
     text-indent: 30px;
 }
+#searchBtn{
+    position: relative;
+    left: 255px;
+    top: -25px;
+}

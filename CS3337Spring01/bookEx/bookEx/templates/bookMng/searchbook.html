@@ -10,19 +10,17 @@
 {% endblock sidenav %}
 {% block content %}
 <h1 align="center"> Book Search Function</h1>
-{% if submitted %}
-{% else %}
+
 <form action="" enctype="multipart/form-data" method="post" novalidate>
     <table align="center">
         {{ form.as_table }}
         <tr>
-            <td>
+            <td id="searchBtn">
                 <input type="submit" value="Submit">
             </td>
         </tr>
     </table>
     {% csrf_token %}
 </form>
-{% endif %}
 
 {% endblock content%}
