@@ -20,6 +20,12 @@
             Picture
         </th>
         <th>
+            Price
+        </th>
+        <th>
+            Date Listed
+        </th>
+        <th>
             DELETE Listing
         </th>
     </tr>
@@ -32,6 +38,12 @@
          </td>
          <td>
              <img src="{% static book.pic_path %}" height="50"/>
+         </td>
+         <td>
+             ${{book.price}}
+         </td>
+         <td>
+             {{book.publishdate}}
          </td>
          <td>
              <a href="book_delete/{{ book.id }}">

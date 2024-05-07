@@ -21,3 +21,17 @@ class Book(models.Model):
 
     def __str__(self):
         return str(self.id)
+class Comment(models.Model):
+    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField('Comments')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class AdditionalComments(models.Model):
+    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField('Add a Comment')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text
