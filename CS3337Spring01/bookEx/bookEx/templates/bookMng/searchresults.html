@@ -11,6 +11,17 @@
 <!-- displays table results from search book query -->
 {% block content %}
   <h1 align="center">Search Results</h1>
+<form action="" enctype="multipart/form-data" method="post" novalidate>
+    <table align="center">
+        {{ form.as_table }}
+        <tr>
+            <td id="searchBtn">
+                <input type="submit" value="Submit">
+            </td>
+        </tr>
+    </table>
+    {% csrf_token %}
+</form>
   <table align="center" border="2" width="600">
     <tr>
         <th>
