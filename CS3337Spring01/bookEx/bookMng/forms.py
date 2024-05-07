@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Book
+from .models import Book, Comment, AdditionalComments
 
 class BookForm(ModelForm):
     class Meta:
@@ -17,3 +17,12 @@ class SearchForm(ModelForm): #for searchbook.html
         fields = [
             'name',
         ]
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+
+class AdditionalCommentForm(forms.ModelForm):
+    class Meta:
+        model = AdditionalComments
+        fields = ['text']

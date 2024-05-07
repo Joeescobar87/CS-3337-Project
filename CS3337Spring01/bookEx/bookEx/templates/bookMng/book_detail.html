@@ -48,4 +48,23 @@
          </td>
      </tr>
 </table>
+<h2>Seller Comments</h2>
+<ul>
+    {% for comment in comments %}
+        <li>{{ comment.text }}</li>
+    {% endfor %}
+</ul>
+<h2>Additional Comments</h2>
+<ul>
+    {% for additional_comment in additional_comments %}
+        <li>{{ additional_comment.text }} - {{ additional_comment.user.username }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Add a Comment</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ additional_comment_form.as_p }}
+    <button type="submit">Submit</button>
+</form>
 {% endblock content %}
