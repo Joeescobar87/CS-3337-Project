@@ -1,20 +1,18 @@
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
-from .models import MainMenu
+from .models import MainMenu, Favorite
 from .forms import BookForm
 from .forms import SearchForm
 from .models import Book
 from .models import Comment, AdditionalComments
 from .forms import CommentForm, AdditionalCommentForm
 
-
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-
 
 from django.contrib.auth.decorators import login_required
 
@@ -34,7 +32,7 @@ def postbook(request):
         form = BookForm(request.POST, request.FILES)
         comment_form = CommentForm(request.POST)
         if form.is_valid() and comment_form.is_valid():
-            #form.save()
+            # form.save()
             book = form.save(commit=False)
             book.username = request.user
             book.save()
@@ -131,6 +129,7 @@ def book_delete(request, book_id):
                       'book': book
                   })
 
+
 @login_required(login_url=reverse_lazy('login'))
 def aboutus(request):
     return render(request,
@@ -139,13 +138,14 @@ def aboutus(request):
                       'item_list': MainMenu.objects.all(),
                   })
 
+
 @login_required(login_url=reverse_lazy('login'))
 def searchbook(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
-            books = Book.objects.filter(name__icontains =name)
+            books = Book.objects.filter(name__icontains=name)
             for b in books:
                 b.pic_path = b.picture.url[14:]
             return render(request,
@@ -164,3 +164,28 @@ def searchbook(request):
                       'item_list': MainMenu.objects.all(),
                   })
 
+
+@login_required(login_url=reverse_lazy('login'))
+def add_to_favorites(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    favorite, created = Favorite.objects.get_or_create(user=request.user, book=book)
+    return redirect('display_fav_list')
+
+
+@login_required
+def remove_from_favorites(request, book_id):
+    favorite = Favorite.objects.get(pk=book_id)
+    favorite.delete()
+    return redirect('display_fav_list')
+
+
+@login_required
+def display_fav_list(request):
+    favorites = Favorite.objects.filter(user=request.user)
+    for b in favorites:
+        b.book.pic_path = b.book.picture.url[14:]
+    return render(request,
+                  'bookMng/display_fav_list.html',
+                  {'favorites': favorites,
+                   'item_list': MainMenu.objects.all(),
+                   })

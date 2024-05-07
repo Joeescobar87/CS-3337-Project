@@ -32,6 +32,9 @@
         <th>
             Publish Date
         </th>
+          <th>
+            Action
+        </th>
     </tr>
     <tr>
          <td>
@@ -45,6 +48,9 @@
          </td>
          <td>
                 {{ book.publishdate }}
+         </td>
+         <td>
+                          <a href="{% url 'add_to_favorites' book.id %}">Add to Favorites</a>
          </td>
      </tr>
 </table>
