@@ -19,6 +19,9 @@
         <th>
             Picture
         </th>
+        <th>
+            Price
+        </th>
     </tr>
     {% for book in books %}
      <tr>
@@ -29,6 +32,9 @@
          </td>
          <td>
              <img src="{% static book.pic_path %}" height="50"/>
+         </td>
+         <td>
+             ${{book.price}}
          </td>
      </tr>
     {% endfor %}
