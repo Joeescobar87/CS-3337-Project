@@ -19,7 +19,7 @@ from django.urls import path
 from django.urls import include
 from django.views.generic.base import TemplateView
 from bookMng.views import Register
-
+from bookMng.views import rate_book
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/success', TemplateView.as_view(
@@ -29,4 +29,5 @@ urlpatterns = [
     path('', include('bookMng.urls')),
     path('register', Register.as_view(), name='register'),
     path('bookMng/', include('bookMng.urls')),
+    path('rate-book/', rate_book, name='rate_book'),
 ]

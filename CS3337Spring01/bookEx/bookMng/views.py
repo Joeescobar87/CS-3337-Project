@@ -13,6 +13,7 @@ from .forms import CommentForm, AdditionalCommentForm
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
+from django.urls import reverse
 
 from django.contrib.auth.decorators import login_required
 
@@ -189,3 +190,12 @@ def display_fav_list(request):
                   {'favorites': favorites,
                    'item_list': MainMenu.objects.all(),
                    })
+
+
+def rate_book(request):
+    if request.method == 'POST':
+        book_id = request.POST.get('book_id')
+        rating = request.POST.get('rating')
+        return HttpResponseRedirect(reverse('book_detail', args=[book_id]))
+    else:
+        return render(request, {'message': 'Invalid request method'})
