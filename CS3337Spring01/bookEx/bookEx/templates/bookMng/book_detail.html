@@ -73,4 +73,48 @@
     {{ additional_comment_form.as_p }}
     <button type="submit">Submit</button>
 </form>
+
+ <h2>Book Rating</h2>
+<form action="/rate-book/" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="book_id" value="{{ book.id }}">
+    <div class="rating">
+        <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+        <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+        <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+        <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+        <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+    </div>
+    <button type="submit" style="margin-top: 20px;" >Submit Rating</button>
+</form>
+
+<style>
+    .rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        padding-right: 20px;
+    }
+
+
+    .rating input {
+        display: none;
+    }
+
+    .rating label {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background-image: url('{% static "star-empty.png" %}');
+        background-size: cover;
+        cursor: pointer;
+    }
+
+    .rating label:hover,
+    .rating input:checked + label,
+    .rating input:checked ~ label {
+        background-image: url('{% static "star-filled.png" %}');
+    }
+</style>
+
 {% endblock content %}
