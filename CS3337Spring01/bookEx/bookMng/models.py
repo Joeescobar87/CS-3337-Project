@@ -33,9 +33,15 @@ class AdditionalComments(models.Model):
     text = models.TextField('Add a Comment')
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.text
+
+
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.text
+
+def __str__(self):
+    return str(self.id)
+
